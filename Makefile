@@ -19,3 +19,6 @@ cluster-dashboard:
 
 cluster-dashboard-token:
 	@./scripts/cluster.sh dashboard-token
+
+argocd-install:
+	@./scripts/argocd.sh install
