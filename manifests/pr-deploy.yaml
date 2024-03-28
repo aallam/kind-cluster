@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: simpleservice-pr-appset
+  namespace: argocd
+spec:
+  generators:
+    - pullRequest:
+        github:
+          owner: aallam
+          repo: simpleservice
+          labels:
+            - preview
+        requeueAfterSeconds: 300
+  template:
+    metadata:
+      name: 'simpleservice-pr-{{number}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/aallam/simpleservice'
+        targetRevision: '{{head_sha}}'
+        helm:
+          parameters:
+            - name: simpleservice.image.tag
+              value: "pr-{{number}}"
+        path: deploy
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: 'simpleservice-pr-{{number}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
