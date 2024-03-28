@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: simpleservice-pr-appset
+  name: simpleservice-appset
   namespace: argocd
 spec:
   generators:
@@ -23,7 +23,7 @@ spec:
         helm:
           parameters:
             - name: simpleservice.image.tag
-              value: "pr-{{number}}"
+              value: "pr-{{number}}-{{head_short_sha_7}}"
         path: deploy
       destination:
         server: 'https://kubernetes.default.svc'
@@ -34,3 +34,8 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+    operation:
+      sync:
+        syncStrategy:
+            apply:
+              force: true
