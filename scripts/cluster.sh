@@ -49,16 +49,14 @@ nodes:
     - containerPort: 443
       hostPort: 443
       protocol: TCP
-    - containerPort: 30000
-      hostPort: 30000
-    - containerPort: 32000
-      hostPort: 32000
-    - containerPort: 30100
-      hostPort: 30100
-    - containerPort: 30101
-      hostPort: 30101
-    - containerPort: 30102
-      hostPort: 30102
+    - containerPort: 30080
+      hostPort: 30080
+    - containerPort: 30443
+      hostPort: 30443
+    - containerPort: 31080
+      hostPort: 31080
+    - containerPort: 31443
+      hostPort: 31443
   - role: worker
   - role: worker
   - role: worker
