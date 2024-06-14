@@ -61,6 +61,8 @@ nodes:
       hostPort: 30102
   - role: worker
   - role: worker
+  - role: worker
+  - role: worker
 containerdConfigPatches:
 - |-
   [plugins."io.containerd.grpc.v1.cri".registry]
